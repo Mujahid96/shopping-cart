@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title>Shopping Cart</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
+   <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+
+   <section>
+      <div class="container">
+         <div class="cart">
+            <div class="col-md-12 col-lg-10 mx-auto">
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item">
+                        <img src="images/product-1.png" alt="">
+                        <h5>iPhone 11 128GB Black</h5>
+                     </div>
+
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="minusBtn" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input type="text" id="val" class="form-control text-center" value="1">
+                           <button id="plusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <h5>$ <span id="iphoneprice">1219</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+                     <div class="col-md-7 center-item mx-auto">
+                        <img src="images/product-2.png" alt="">
+                        <h5>iPhone 11 Silicone Case - Black</h5>
+                     </div>
+                     <div class="col-md-5 center-item">
+                        <div class="input-group number-spinner">
+                           <button id="negBtncover"  class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input type="text" id="coverVal" class="form-control text-center" value="1">
+                           <button id="plusBtncover" class="btn btn-default"><i class="fas fa-plus"></i></button>
+
+                        </div>
+                        <h5>$ <span id="coverprice"> 59</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item">
+                     </div>
+                  </div>
+               </div>
+
+               <div class="cart-item">
+                  <div class="row">
+
+                     <div class="col-md-8">
+                        <h5>Subtotal: </h5>
+                        <h5>Tax:</h5>
+                        <h5>Total:</h5>
+                     </div>
+
+                     <div class="col-md-4 status">
+                        <h5>$ <span id="subtotal">1,278</span> </h5>
+                        <h5>$0</h5>
+                        <h5>$ <span id="total">1,278</span> </h5>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-12 pt-4 pb-4">
+                  <button type="button" class="btn btn-success check-out">Check Out</button>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+   <script>
+      const poslistener =document.getElementById("plusBtn");
+   
+      poslistener.addEventListener('click',function(){
+        
+         increment("iphoneprice","val");
+   
+      });
+      
+      const poslistenercover =document.getElementById("plusBtncover");
+      poslistenercover.addEventListener('click',function(){
+        
+         
+         increment("coverprice","coverVal");
+         
+      });
+      function increment(price,incr){
+
+         const iphone=parseInt(document.getElementById(price).innerText);
+           const inc = parseInt(document.getElementById(incr).value);
+         document.getElementById(incr).value=inc+1;
+        const tr= iphone/inc;
+        
+        document.getElementById(price).innerText=tr*(inc+1);
+        subtotalprice();
+        
+      }
+      const neg =document.getElementById("negBtncover");
+      neg.addEventListener('click',function(){
+        
+         
+         decrement("coverprice","coverVal");
+         
+      });
+      const negprice =document.getElementById("minusBtn");
+      negprice.addEventListener('click',function(){
+        
+         
+         decrement("iphoneprice","val");
+         
+      });
+
+      function decrement(price,decr){
+
+         const iphone=parseInt(document.getElementById(price).innerText);
+           const inc = parseInt(document.getElementById(decr).value);
+           if(inc>1){
+            document.getElementById(decr).value=inc-1;
+        const tr= iphone/inc;
+        
+        document.getElementById(price).innerText=tr*(inc-1);
+        subtotalprice()
+           }
+        
+      
+        
+      }
+      
+      function subtotalprice(){
+         const subtotal =parseInt(document.getElementById('iphoneprice').innerText) ;
+      
+         const coversubtotal =parseInt(document.getElementById('coverprice').innerText) ;
+         //  parseInt(document.getElementById("iphoneprice").innerText.replace(/,/g, ''));
+         
+        document.getElementById('subtotal').innerText=subtotal+coversubtotal;
+        document.getElementById('total').innerText=subtotal+coversubtotal;
+      
+      }
+      
+   </script>
+</body>
+
+</html>
